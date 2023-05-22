@@ -15,9 +15,7 @@ module.exports.getMovies = (req, res, next) => {
 
 module.exports.createMovie = (req, res, next) => {
   const userId = req.user._id;
-  console.log(userId);
-  console.log(req.body);
-  Movie.create({ userId, ...req.body })
+  Movie.create({ owner: userId, ...req.body })
     .then((movie) => res.status(CREATED).send(movie))
     .catch((err) => {
       if (err.code === 11000) return next(new ConflictError('Такая запись с фильмом уже существует.'));
