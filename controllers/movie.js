@@ -8,7 +8,6 @@ const { CREATED } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
   const owner = req.user._id;
-  console.log(owner);
   Movie.find({ owner })
     .then((movies) => res.send(movies))
     .catch(next);
@@ -40,6 +39,9 @@ module.exports.removeMovie = (req, res, next) => {
       }
       const userId = req.user._id.toString();
       const movieUserId = movie.owner._id.toString();
+
+      console.log(userId);
+      console.log(movieUserId);
 
       if (userId !== movieUserId) return next(new ForbiddenError('Нельзя удалить чужой фильм.'));
 

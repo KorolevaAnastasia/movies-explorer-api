@@ -1,6 +1,21 @@
 const { celebrate, Joi } = require('celebrate');
 const { regExp } = require('../utils/utils');
 
+const validateLogin = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+});
+
+const validateCreateUser = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+});
+
 const validateUpdateUserProfile = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
@@ -24,4 +39,6 @@ const validateCreateMovie = celebrate({
   }),
 });
 
-module.exports = { validateUpdateUserProfile, validateCreateMovie };
+module.exports = {
+  validateUpdateUserProfile, validateCreateMovie, validateLogin, validateCreateUser,
+};

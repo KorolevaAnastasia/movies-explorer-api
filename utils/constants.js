@@ -5,6 +5,7 @@ const FORBIDDEN_ERROR = 403;
 const NOT_FOUND = 404;
 const CONFLICT_ERROR = 409;
 const INTERNAL_SERVER_ERROR = 500;
+const DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb';
 
 module.exports = {
   BAD_REQUEST,
@@ -14,4 +15,5 @@ module.exports = {
   AUTH_ERROR,
   CONFLICT_ERROR,
   FORBIDDEN_ERROR,
+  DB_URL,
 };

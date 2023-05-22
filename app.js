@@ -12,8 +12,9 @@ const { errors } = require('celebrate');
 const { routes } = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleError } = require('./errors/handleError');
+const { DB_URL } = require('./utils/constants');
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb')
+mongoose.connect(DB_URL)
   .then(() => console.log('Успешное подключение к MongoDB'))
   .catch((error) => console.error('Ошибка подключения:', error));
 

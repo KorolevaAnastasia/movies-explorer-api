@@ -1,27 +1,16 @@
 const express = require('express');
 
 const routes = express.Router();
-const { celebrate, Joi } = require('celebrate');
+const auth = require('../middlewares/auth');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { createUser, login } = require('../controllers/user');
-const auth = require('../middlewares/auth');
+const { validateCreateUser, validateLogin } = require('../middlewares/validation');
 
 routes.all('*', express.json());
 
-routes.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), createUser);
+routes.post('/signup', validateCreateUser, createUser);
 
-routes.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
+routes.post('/signin', validateLogin, login);
 
 routes.use('/users', auth, require('./users'));
 routes.use('/movies', auth, require('./movies'));
