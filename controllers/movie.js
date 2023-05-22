@@ -7,8 +7,9 @@ const { ForbiddenError } = require('../errors/ForbiddenError');
 const { CREATED } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
-  const userId = req.user._id;
-  Movie.find({ userId })
+  const owner = req.user._id;
+  console.log(owner);
+  Movie.find({ owner })
     .then((movies) => res.send(movies))
     .catch(next);
 };
