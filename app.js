@@ -13,7 +13,7 @@ const { routes } = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleError } = require('./errors/handleError');
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb')
   .then(() => console.log('Успешное подключение к MongoDB'))
   .catch((error) => console.error('Ошибка подключения:', error));
 
