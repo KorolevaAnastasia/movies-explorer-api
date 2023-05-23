@@ -7,14 +7,14 @@ require('dotenv').config();
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DB_ENV } = process.env;
 const { errors } = require('celebrate');
+const { DB_URL } = require('./utils/constants');
 const { routes } = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleError } = require('./errors/handleError');
-const { DB_URL } = require('./utils/constants');
 
-mongoose.connect(DB_URL)
+mongoose.connect(NODE_ENV ? DB_ENV : DB_URL)
   .then(() => console.log('Успешное подключение к MongoDB'))
   .catch((error) => console.error('Ошибка подключения:', error));
 
