@@ -19,8 +19,21 @@ const VALID_CREATE_MOVIE_ERR_MSG = 'Некорректные данные при
 const NOTFOUND_MOVIE_ERR_MSG = 'Передан несуществующий _id фильма.';
 const FORBIDDEN_MOVIE_ERR_MSG = 'Нельзя удалить чужой фильм.';
 
+const INTERNAL_SERVER_ERR_MSG = 'На сервере произошла ошибка.';
+const AUTH_SERVER_ERR_MSG = 'Необходима авторизация.';
+const NOT_FOUNT_ERR_MSG = 'Страница не найдена';
+
 // db_url
 const DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb';
+const DB_CONNECT_MSG = 'Успешное подключение к MongoDB';
+const DB_CONNECT_ERR_MSG = 'Ошибка подключения';
+const VALID_DB_AUTH_ERR_MSG = 'Неправильные почта или пароль.';
+const VALID_DB_URL_ERR_MSG = 'Введите корректный URL.';
+const VALID_DB_EMAIL_ERR_MSG = 'Неправильный формат почты.';
+
+const LOCAL_SECRET = 'secret-key';
+
+const CRASH_TEST_MSG = 'Сервер сейчас упадет';
 
 module.exports = {
   BAD_REQUEST,
@@ -40,4 +53,14 @@ module.exports = {
   VALID_CREATE_MOVIE_ERR_MSG,
   NOTFOUND_MOVIE_ERR_MSG,
   FORBIDDEN_MOVIE_ERR_MSG,
+  INTERNAL_SERVER_ERR_MSG,
+  AUTH_SERVER_ERR_MSG,
+  VALID_DB_URL_ERR_MSG,
+  VALID_DB_EMAIL_ERR_MSG,
+  VALID_DB_AUTH_ERR_MSG,
+  NOT_FOUNT_ERR_MSG,
+  DB_CONNECT_MSG,
+  DB_CONNECT_ERR_MSG,
+  CRASH_TEST_MSG,
+  LOCAL_SECRET,
 };

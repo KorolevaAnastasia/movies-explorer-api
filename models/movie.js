@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isUrl } = require('../utils/utils');
+const { VALID_DB_URL_ERR_MSG } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   nameRU: {
@@ -33,17 +34,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: { validator: isUrl, message: 'Введите корректный URL' },
+    validate: { validator: isUrl, message: VALID_DB_URL_ERR_MSG },
   },
   trailerLink: {
     type: String,
     required: true,
-    validate: { validator: isUrl, message: 'Введите корректный URL' },
+    validate: { validator: isUrl, message: VALID_DB_URL_ERR_MSG },
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: { validator: isUrl, message: 'Введите корректный URL' },
+    validate: { validator: isUrl, message: VALID_DB_URL_ERR_MSG },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

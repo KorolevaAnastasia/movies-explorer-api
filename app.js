@@ -9,18 +9,20 @@ const app = express();
 
 const { PORT = 3000, NODE_ENV, DB_ENV } = process.env;
 const { errors } = require('celebrate');
-const { DB_URL } = require('./utils/constants');
+const {
+  DB_URL, DB_CONNECT_MSG, DB_CONNECT_ERR_MSG, CRASH_TEST_MSG,
+} = require('./utils/constants');
 const { routes } = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleError } = require('./errors/handleError');
 
 mongoose.connect(NODE_ENV ? DB_ENV : DB_URL)
-  .then(() => console.log('Успешное подключение к MongoDB'))
-  .catch((error) => console.error('Ошибка подключения:', error));
+  .then(() => console.log(DB_CONNECT_MSG))
+  .catch((error) => console.error(DB_CONNECT_ERR_MSG, error));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадет');
+    throw new Error(CRASH_TEST_MSG);
   }, 0);
 });
 

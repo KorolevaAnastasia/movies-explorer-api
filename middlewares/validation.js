@@ -19,7 +19,7 @@ const validateCreateUser = celebrate({
 const validateUpdateUserProfile = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
@@ -41,7 +41,7 @@ const validateCreateMovie = celebrate({
 
 const validateRemoveMovie = celebrate({
   body: Joi.object().keys({
-    movieId: Joi.string().required().length(24).hex()
+    movieId: Joi.string().length(24).hex(),
   }),
 });
 

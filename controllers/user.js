@@ -11,6 +11,7 @@ const {
   VALID_UPDATE_USER_ERR_MSG,
   NOTFOUND_USER_ERR_MSG,
   UNIQUE_UPDATE_USER_ERR_MSG,
+  LOCAL_SECRET,
 } = require('../utils/constants');
 
 const { NotFoundError } = require('../errors/NotFoundError');
@@ -21,7 +22,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, NODE_ENV ? JWT_SECRET : 'secret-key', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV ? JWT_SECRET : LOCAL_SECRET, { expiresIn: '7d' });
       res.send({ jwt: token });
     })
     .catch(next);

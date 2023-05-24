@@ -1,12 +1,10 @@
 const Movie = require('../models/movie');
 
 const { NotFoundError } = require('../errors/NotFoundError');
-const { ConflictError } = require('../errors/ConflictError');
 const { ValidationError } = require('../errors/ValidationError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
 const {
   CREATED,
-  CONFLICT_MOVIE_ERR_MSG,
   VALID_CREATE_MOVIE_ERR_MSG,
   NOTFOUND_MOVIE_ERR_MSG,
   FORBIDDEN_MOVIE_ERR_MSG,
@@ -24,7 +22,6 @@ module.exports.createMovie = (req, res, next) => {
   Movie.create({ owner: userId, ...req.body })
     .then((movie) => res.status(CREATED).send(movie))
     .catch((err) => {
-      if (err.code === 11000) return next(new ConflictError(CONFLICT_MOVIE_ERR_MSG));
       if (err.name === 'ValidationError') return next(new ValidationError(VALID_CREATE_MOVIE_ERR_MSG));
       return next(err);
     });
