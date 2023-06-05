@@ -40,7 +40,11 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
-      res.status(CREATED).send(user);
+      res.status(CREATED).send({
+        name: user.name,
+        email: user.email,
+        _id: user._id
+      });
     })
     .catch((err) => {
       if (err.code === 11000) return next(new ConflictError(UNIQUE_USER_ERR_MSG));
